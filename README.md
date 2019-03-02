@@ -11,3 +11,23 @@ Accordion content based on the UIkit 3 framework. Content plugin for Joomla! 3
 The plugin contains all the basic settings, implemented in the framework UIkit 3, necessary to display a full-fledged accordion.
 
 **Attention!** The plugin does not contain scripts and framework styles, connect them yourself in your template (it is assumed that your template is already based on this framework).
+
+## Usage
+
+Indert into content editor:
+
+```
+{accordion Title 1}
+
+Your content is inside the "Title 1" slide
+
+{accordion Title 2}
+
+Your content is inside the "Title 2" slide
+
+{/accordion}
+```
+
+HTML tags immediately adjacent to the shortcodes in curly braces will be cut.
+
+Multiple slide blocks per page are supported. Nested slides are not supported.
