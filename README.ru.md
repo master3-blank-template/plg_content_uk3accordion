@@ -1,6 +1,6 @@
 # UIkit 3 Accordion - Content plugin
 
-![Version](https://img.shields.io/badge/VERSION-1.0.0-0366d6.svg?style=for-the-badge)
+![Version](https://img.shields.io/badge/VERSION-1.1.0-0366d6.svg?style=for-the-badge)
 ![Joomla](https://img.shields.io/badge/joomla-3.7+-1A3867.svg?style=for-the-badge)
 ![Php](https://img.shields.io/badge/php-5.6+-8892BF.svg?style=for-the-badge)
 
@@ -14,14 +14,14 @@
 
 Вставьте в редактор контента:
 
-```
+```text
 {accordion Заголовок 1}
 
-Ваш контент внутри слайда "Загооволк 1"
+Ваш контент внутри слайда "Заголовок 1"
 
 {accordion Заголовок 2}
 
-Ваш контент внутри слайда "Загооволк 2"
+Ваш контент внутри слайда "Заголовок 2"
 
 {/accordion}
 ```

@@ -2,13 +2,15 @@
 /**
  * @package     Joomla.Plugin
  * @subpackage  Content.uk3accordion
- * @copyright   Copyright (C) 2019 Aleksey A. Morozov. All rights reserved.
+ * @copyright   Copyright (C) Aleksey A. Morozov. All rights reserved.
  * @license     GNU General Public License version 3 or later; see http://www.gnu.org/licenses/gpl-3.0.txt
  */
 
+use Joomla\CMS\Factory;
 use Joomla\CMS\Plugin\CMSPlugin;
 use Joomla\CMS\Plugin\PluginHelper;
 use Joomla\CMS\Filesystem\Path;
+use Joomla\CMS\Filter\OutputFilter;
 
 class PlgContentUk3accordion extends CMSPlugin
 {
@@ -75,23 +77,30 @@ class PlgContentUk3accordion extends CMSPlugin
         }
 
         if ($matches) {
+            Factory::getDocument()->addScript('/plugins/content/uk3accordion/assets/plgukaccordion.js');
             $accordionCount = 0;
             foreach ($matches[0] as $match) {
                 if ($accordion[$accordionCount] < 3) {
                     $title = preg_replace('|{accordion\s(.*)}|U', '\\1', $match);
-                    $match = '/' . preg_quote($match) . '/U';
+                    $title = strip_tags($title);
+                    $id = 'slide-' . OutputFilter::stringURLSafe($title);
+                    $match = '|' . $match . '|U';
                     ob_start();
                     include $layout . ($accordion[$accordionCount] < 2 ? '_start.php' : '_li_end.php');
                     include $layout . '_li_start.php';
                     $accordion_content = ob_get_clean();
                 } elseif ($accordion[$accordionCount] == 3) {
-                    $match = '/{\/accordion}/U';
+                    $match = '|{/accordion}|U';
                     ob_start();
                     include $layout . '_li_end.php';
                     include $layout . '_end.php';
                     $accordion_content = ob_get_clean();
                 }
-                $article->text = preg_replace($match, $accordion_content, $article->text, 1);
+                $atext = $article->text;
+                $atext = preg_replace($match, $accordion_content, $atext, 1);
+                if ($atext) {
+                    $article->text = $atext;
+                }
                 $accordionCount++;
             }
         }
