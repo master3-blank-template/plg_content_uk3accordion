@@ -12,6 +12,7 @@
     <scriptfile>script.php</scriptfile>
 	<files>
 		<filename plugin="uk3accordion">uk3accordion.php</filename>
+		<folder>assets</folder>
         <folder>tmpl</folder>
 	</files>
 	<languages>
