@@ -82,14 +82,15 @@ class PlgContentUk3accordion extends CMSPlugin
             foreach ($matches[0] as $match) {
                 if ($accordion[$accordionCount] < 3) {
                     $title = preg_replace('|{accordion\s(.*)}|U', '\\1', $match);
+                    $title = strip_tags($title);
                     $id = 'slide-' . OutputFilter::stringURLSafe($title);
-                    $match = '/' . str_replace(['/', '?'], ['\/', '\?'], preg_quote($match)) . '/U';
+                    $match = '|' . str_replace(['/', '?'], ['\/', '\?'], preg_quote($match)) . '|U';
                     ob_start();
                     include $layout . ($accordion[$accordionCount] < 2 ? '_start.php' : '_li_end.php');
                     include $layout . '_li_start.php';
                     $accordion_content = ob_get_clean();
                 } elseif ($accordion[$accordionCount] == 3) {
-                    $match = '/{\/accordion}/U';
+                    $match = '|{/accordion}|U';
                     ob_start();
                     include $layout . '_li_end.php';
                     include $layout . '_end.php';
